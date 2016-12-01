@@ -2,15 +2,11 @@ var randomLetterString = "havok"
 console.log("Text String is: " + randomLetterString)
 var fs  = require("fs");
 
-//var dictionary = []
-//var arraya = fs.readFileSync('defaultList.txt').toString().split('\n\r');
-//var arraya = fs.readFileSync('defaultList.txt').toString().replace("\r","").split("\n")
 var arraya = fs.readFileSync('defaultList.txt').toString().replace("/(\r\n|\n|\r)/gm","").split("\n")
 console.log("Length of Dictionary: " + arraya.length)
 
 var dictionary = arraya
 //////////////////////////////////////////////////////////////////////
-
 var tree = function(leafs) {
     var branches = [];
     if( leafs.length == 1 ) return leafs;
@@ -22,17 +18,13 @@ var tree = function(leafs) {
     }
     return branches;
 };
-
 ///////////////////////////////////////////////////////////////////
-
 var wordCombos = tree(randomLetterString.split('')).map(function(str){return str.join('')})
 console.log("Length of Original WordCombos: " + wordCombos.length)
 var wordCombos2 = wordCombos.filter(function(elem, pos){
   return wordCombos.indexOf(elem) == pos;
 })
-//console.log(tree("aann".split('')).map(function(str){return str.join('')}))
 console.log("Length of WordCombos: " + wordCombos2.length + "\n")
-//console.log(wordCombos2)
 ///////////////////////////////////////////////////////////////////
 var word2 = []
 for (x in dictionary){
@@ -49,10 +41,7 @@ for (var words=0; words<wordCombos2.length; words++){
         console.log(wordCombos2[words] + " is a word!")
       }
   }
-  //console.log(words + " Down")
 }
 }
-
 var timeEnd = Math.floor(Date.now() / 1000)
-
 console.log("Time Took: " + (timeEnd - timeStart) + " seconds")
